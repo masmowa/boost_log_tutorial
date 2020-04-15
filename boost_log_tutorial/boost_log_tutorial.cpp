@@ -2,10 +2,24 @@
 //
 
 #include <iostream>
+#include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
+#include <boost/log/exceptions.hpp>
+#include <boost/log/expressions.hpp>
 
+namespace logging = boost::log;
+
+void init_logging()
+{
+    logging::core::get()->set_filter
+    (
+        logging::trivial::severity >= logging::trivial::info
+    );
+}
 int main()
 {
+    init_logging();
+
     std::cout << "Hello World!\n";
     BOOST_LOG_TRIVIAL(info) << "info level log about boost_log_totorial " << __FUNCTION__ << "()";
     BOOST_LOG_TRIVIAL(trace) << "trace level log about boost_log_totorial " << __FUNCTION__ << "()";
@@ -18,13 +32,3 @@ int main()
     return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

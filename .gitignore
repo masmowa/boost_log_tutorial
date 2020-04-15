@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+*.ipch
+/.vs/boost_log_tutorial/v16
+/boost_log_tutorial/x64/Debug/boost_lo.B2E3EB33.tlog
+/boost_log_tutorial/x64/Debug/vc142.idb
+*.pdb
+*.ilk
