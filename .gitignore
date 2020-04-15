@@ -36,3 +36,19 @@
 /boost_log_tutorial/x64/Debug/vc142.idb
 *.pdb
 *.ilk
+/boost_log_tutorial/00000.log
+
+#directories
+**/x64/
+**/x86/
+
+#output folders/directories
+**/obj/
+**/bin/
+**/po/
+**/lib/
+**/debug/
+**/release/
+**/.vs/
+**/.vscode/
+
