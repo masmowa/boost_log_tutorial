@@ -1,4 +1,5 @@
 // boost_log_tutorial.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// https://www.scalyr.com/blog/getting-started-quickly-c++-logging
 //
 
 #include <iostream>
@@ -11,16 +12,28 @@
 
 
 namespace logging = boost::log;
+namespace keywords = boost::log::keywords;
+namespace attrs = boost::log::attributes;
 
 void init_logging()
 {
+    logging::register_simple_formatter_factory<logging::trivial::severity_level, char>("Severity");
+
     //logging::add_file_log("boost_log_tutorial_log.log");
-    logging::add_file_log("xyzzylog.log");
+    logging::add_file_log(
+        keywords::file_name = "xyzzylog.log",
+        keywords::format = "[%TimeStamp%] [%ThreadID%] [%ProcessID%] [%Severity%] [%LineID%] [%MyAttr%] [%Counter%] %Message%"
+    );
     logging::core::get()->set_filter
     (
         logging::trivial::severity >= logging::trivial::info
     );
+    logging::core::get()->add_global_attribute("MyAttr", attrs::constant<int>(42));
+    logging::core::get()->add_global_attribute("Counter", attrs::counter<int>(100, -1));
+    logging::add_common_attributes();
+
 }
+
 int main()
 {
     try {
